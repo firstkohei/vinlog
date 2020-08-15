@@ -1,0 +1,49 @@
+<div class="py-5">
+<%= form_for @wine do |f| %>
+    <div class="form-group field">
+        <%= f.label "画像をアップロード" %><br><%= f.file_field :image %>
+        <small id="title-tip" class="form-text text-muted">
+            画像を挿入してください。
+        </small>
+    </div>
+    <div class="form-group">
+        <%= f.label :name, 'ワイン名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+        <small id="poster-tip" class="form-text text-muted">
+            ex. シャトーマルゴー
+        </small>
+    </div>
+    <div class="form-group">
+        <%= f.label :area, '生産国・地域' %>
+        <%= f.text_field :area, class: 'form-control' %>
+        <small id="title-tip" class="form-text text-muted">
+            ex. フランス/ボルドー
+        </small>
+    </div>
+    <div class="form-group">
+        <%= f.label :grape, '主なブドウ品種' %>
+        <%= f.text_field :grape, class: 'form-control' %>
+        <small id="title-tip" class="form-text text-muted">
+            ex. カベルネ・ソーヴィニヨン/メルロー/カベルネ・フラン
+        </small>
+    </div>
+    <div class="form-group">
+        <%= f.label :taste, '味わいのタイプ' %>
+        <%= f.text_field :taste, class: 'form-control' %>
+        <small id="title-tip" class="form-text text-muted">
+            味わいを入力してください。
+        </small>
+    </div>
+    <div class="form-group">
+        <%= f.label :content, 'このワインの感想' %>
+        <%= f.text_area :content, class: 'form-control', rows:10 %>
+        <small id="content-tip" class="form-text text-muted">
+            このワインの感想を入力してください。 
+        </small>
+    </div>
+    <%= f.submit 'ワインを投稿', class: 'btn btn-info btn-block' %>
+    <small id="submit-tip" class="form-text text-muted">
+        投稿する前に投稿内容を見直してください!
+    </small>
+<% end %>
+</div>

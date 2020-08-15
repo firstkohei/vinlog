@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_140502) do
+ActiveRecord::Schema.define(version: 2020_08_14_042710) do
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "wine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+    t.index ["wine_id"], name: "index_favorites_on_wine_id"
+  end
+
+  create_table "uploads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "image"
+    t.text "content"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -20,6 +37,24 @@ ActiveRecord::Schema.define(version: 2020_08_05_140502) do
     t.string "profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
+  create_table "wines", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "content"
+    t.string "area"
+    t.string "taste"
+    t.string "grape"
+    t.string "image"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wines_on_user_id"
+  end
+
+  add_foreign_key "favorites", "users"
+  add_foreign_key "favorites", "wines"
+  add_foreign_key "wines", "users"
 end

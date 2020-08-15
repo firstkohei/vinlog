@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
  
+  resources :uploads
  root to: 'toppages#index'
  
  get 'about', to: 'toppages#about'
@@ -9,5 +10,14 @@ Rails.application.routes.draw do
  delete 'logout', to: 'sessions#destroy'
  
  get 'signup', to: 'users#new'
- resources :users, only: [:index, :show, :new, :create]
+ 
+ resources :users do
+  member do
+   get :likes
+  end
+ end
+ 
+ resources :wines
+ resources :favorites, only: [:create, :destroy]
+ resources :password_resets,     only: [:new, :create, :edit, :update]
 end
