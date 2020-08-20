@@ -45,15 +45,6 @@ class ImagesUploader < CarrierWave::Uploader::Base
    %w(jpg jpeg gif png)
   end
   
-  # サムネイル画像
-  version :thumb do
-    process resize_to_fill: [250, 250]
-  end
-
-  # Maxサイズ
-  version :content do
-    process resize_to_limit: [300, 300]
-  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
