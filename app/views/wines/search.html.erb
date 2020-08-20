@@ -4,9 +4,11 @@
     <div class="container">
       <h1>Wines</h1>
       <p class="lead text-muted">ユーザーが投稿したワイン一覧です。</p>
-      <p>
-        <a href="new_user_path" class="btn btn-primary my-2">ワインを投稿してみよう！</a>
-      </p>
+      <% unless logged_in? %>
+        <p>
+          <a href="/signup" class="btn btn-primary my-2">ワインを投稿してみよう！</a>
+        </p>
+      <% end %>
     </div>
   </section>
   

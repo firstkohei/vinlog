@@ -52,10 +52,6 @@ class WinesController < ApplicationController
   
   def search
     @wines = Wine.search(params[:search])
-    if @wines == nil
-      flash[:notice] = "連絡先を登録しました"
-      redirect_to root_url
-    end
   end
   
   private

@@ -20,4 +20,5 @@ class Wine < ApplicationRecord
       Wine.all
     end
   end
+  
 end
