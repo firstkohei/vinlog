@@ -1,9 +1,10 @@
 <div class="py-5">
 <%= form_for @wine do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
     <div class="form-group field">
         <%= f.label "画像をアップロード" %><br><%= f.file_field :image %>
         <small id="title-tip" class="form-text text-muted">
-            画像を挿入してください。
+            ワインのラベルを挿入してください。
         </small>
     </div>
     <div class="form-group">
@@ -29,7 +30,7 @@
     </div>
     <div class="form-group">
         <%= f.label :taste, '味わいのタイプ' %>
-        <%= f.text_field :taste, class: 'form-control' %>
+        <%= f.select :taste, [["酸味が豊か", "酸味が豊か"], ["香りが豊か", "香りが豊か"],["タンニン（渋み）が豊か", "タンニン（渋み）が豊か"],["木樽の香りが豊か", "木樽の香りが豊か"],["果実味が豊か", "果実味が豊か"]], include_blank: "選択して下さい" %>
         <small id="title-tip" class="form-text text-muted">
             味わいを入力してください。
         </small>

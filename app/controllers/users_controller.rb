@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def index
     @users = User.order(id: :desc).page(params[:page]).per(8)
   end
@@ -50,6 +51,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password_digest, :password_confirmation, :profile)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :image)
   end
 end

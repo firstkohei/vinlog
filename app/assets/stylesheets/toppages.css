@@ -5,3 +5,19 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.like-btn {
+ color: #808080; 
+ }
+
+.unlike-btn {
+ color: #e54747;
+ }
+ 
+.text {
+  width: 400px;
+  height: 38px;
+ }
+ 
+
+ 

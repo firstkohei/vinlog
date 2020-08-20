@@ -2,20 +2,35 @@
     <%= form_with(model: @user, local: true) do |f| %>
     
     <div class="form-group">
-        <%= f.label :画像 %>
-        <%= f.file_field :image, class: "image" %>
-        <small id="title-tip" class="form-text text-muted">
-            プロフィール画像を登録してみよう！
-        </small>
-    </div>
-    <div class="form-group">
       <%= f.label :name, 'Name' %>
       <%= f.text_field :name, class: 'form-control' %>
+      <small id="content-tip" class="form-text text-muted">
+        　変更したい名前を入力してください。
+      </small>
     </div>
 
     <div class="form-group">
       <%= f.label :email, 'Email' %>
       <%= f.email_field :email, class: 'form-control' %>
+      <small id="content-tip" class="form-text text-muted">
+        　変更したいメールアドレスを入力してください。
+      </small>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :password, 'Password' %>
+      <%= f.password_field :password, class: 'form-control' %>
+      <small id="content-tip" class="form-text text-muted">
+        　変更したいパスワードを入力してください。
+      </small>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'Confirmation' %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <small id="content-tip" class="form-text text-muted">
+        　変更したいパスワードをもう一度入力してください。
+      </small>
     </div>
 
     <div class="form-group">
@@ -28,9 +43,6 @@
 
     <%= f.submit 'プロフィールを更新する', class: 'btn btn-info btn-block' %>
     <% end %>
-    <div class="form-group">
-        <%= link_to "パスワードを変更する", new_password_reset_path %>
-    </div>
   </div>
 </div>
 

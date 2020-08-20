@@ -4,7 +4,11 @@ class ImagesUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  if Rails.env.production?
+    include Cloudinary::CarrierWave
+  else
+    storage :file
+  end
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -13,8 +17,8 @@ class ImagesUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
-  process :resize_to_limit => [250, 250]
-  process resize_to_fill: [300, 300]
+  process :resize_to_limit => [250, 450]
+  process resize_to_fill: [400, 500]
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -43,12 +47,12 @@ class ImagesUploader < CarrierWave::Uploader::Base
   
   # サムネイル画像
   version :thumb do
-    process resize_to_fill: [80, 80]
+    process resize_to_fill: [250, 250]
   end
 
   # Maxサイズ
   version :content do
-    process resize_to_limit: [640, 640]
+    process resize_to_limit: [300, 300]
   end
 
   # Override the filename of the uploaded files:

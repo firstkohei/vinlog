@@ -1,6 +1,7 @@
 class ToppagesController < ApplicationController
+  
   def index
-    @wines = Wine.order(id: :desc).page(params[:page]).per(4)
+    @wines = Wine.order(id: :desc).limit(4)
     render layout: 'toppage'
   end
   

@@ -37,8 +37,6 @@ ActiveRecord::Schema.define(version: 2020_08_14_042710) do
     t.string "profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "reset_digest"
-    t.datetime "reset_sent_at"
   end
 
   create_table "wines", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

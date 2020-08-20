@@ -21,9 +21,9 @@ class WinesController < ApplicationController
       flash[:success] = 'ワインを投稿しました。'
       redirect_to @wine
     else
-      @microposts = current_user.wines.order(id: :desc).page(params[:page])
+      @wines = current_user.wines.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'ワインの投稿に失敗しました。'
-      render 'toppages/index'
+      render("wines/new")
     end
   end
 
@@ -47,7 +47,15 @@ class WinesController < ApplicationController
   def destroy
     @wine.destroy
     flash[:success] = 'ワインを削除しました。'
-    redirect_to root_url
+    redirect_back(fallback_location: root_path)
+  end
+  
+  def search
+    @wines = Wine.search(params[:search])
+    if @wines == nil
+      flash[:notice] = "連絡先を登録しました"
+      redirect_to root_url
+    end
   end
   
   private

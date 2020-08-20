@@ -11,4 +11,13 @@ class Wine < ApplicationRecord
   validates :taste, presence: true, length: { maximum: 50 }
   validates :grape, presence: true, length: { maximum: 50 }
   validates :content, presence: true, length: { maximum: 255 }
+  validates :image, presence: true
+  
+  def self.search(search)
+    if search
+      Wine.where(['name LIKE ?', "%#{search}%"])
+    else
+      Wine.all
+    end
+  end
 end

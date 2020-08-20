@@ -6,25 +6,20 @@
           <h1 class="mb-5">お気に入りのワインを探してみよう！</h1>
         </div>
         <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-          <form>
-            <div class="form-row">
-              <div class="col-12 col-md-9 mb-2 mb-md-0">
-                <input type="email" class="form-control form-control-lg" placeholder="Serch any wines">
-              </div>
-              <div class="col-12 col-md-3">
-                <button type="submit" class="btn btn-block btn-lg btn-primary">検索</button>
-              </div>
-            </div>
-          </form>
+          <%= form_tag(search_wines_path,:method => 'get') do %>
+            <%= text_field_tag :search,'', class: 'text' %>
+            <%= submit_tag '検索', :name => nil,class: 'btn btn-danger' %>
+          <% end %>
         </div>
       </div>
+    </div>  
   </div>
 </header>
 
 
 <h2 class="ml-5 py-5">最近投稿されたワイン</h2>
 
-<div class="album py-5">
+<div class="album py-5 bg-light">
   <div class="container">
     <div class="row">
     <% @wines.each do |wine| %>
@@ -32,22 +27,36 @@
         <div class="card mb-3 shadow-sm">
         <%= image_tag wine.image.to_s%>
           <div class="card-body">
-            <p class="card-text"><p><%= link_to wine.name, wine_path(wine) %></p></p>
+            <p class="card-text"><%= link_to wine.name, wine_path(wine) %></p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
               <% unless current_user == @user %>
                 <% if current_user.favorite?(wine) %>
                   <%= form_with(model: current_user.favorites.find_by(wine_id: wine.id), local: true, method: :delete) do |f| %>
                     <%= hidden_field_tag :wine_id, wine.id %>
-                    <%= f.submit 'Unlike', class: 'btn btn-danger btn-sm' %>
+                    <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+                     <i class="fas fa-heart unlike-btn"></i>
+                     <%= wine.favorite_users.count %>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
                     <%= hidden_field_tag :wine_id, wine.id %>
-                    <%= f.submit 'Like', class: 'btn btn-primary btn-sm' %>
+                    <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+                     <i class="far fa-heart like-btn"></i>
+                     <%= wine.favorite_users.count %>
+                    <% end %>
                   <% end %>
                 <% end %>
               <% end %>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                  <% if current_user == wine.user %>
+                    <%= link_to "削除", wine, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                  <% end %>
+                  <% if current_user != wine.user %>
+                    <small class="text-muted">投稿者：<%= link_to wine.user.name, user_path(wine.user) %></small>
+                  <% end %>
               </div>
             </div>
           </div>
@@ -64,15 +73,15 @@
     <div class="row no-gutters">
       <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/wine.jpg');"></div>
       <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-        <h2>Vinlogとは</h2>
-        <p class="lead mb-0">投稿された、ワインをレビューしていくサービスです。 好きなワインを投稿し、他のユーザーと楽しく自分の好きなワインを共有できます。</p>
+        <h2>Vinlogとは？</h2>
+        <p class="lead mb-0">投稿されたワインをレビューしていくサービスです。 好きなワインを投稿し、他のユーザーと楽しく自分の好きなワインを共有できます。</p>
       </div>
     </div>
     <div class="row no-gutters">
       <div class="col-lg-6 text-white showcase-img" style="background-image: url('img/purple.jpg');"></div>
       <div class="col-lg-6 my-auto showcase-text">
-        <h2>Updated For Bootstrap 4</h2>
-        <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 4 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 4!</p>
+        <h2>Vinlogユーザーでできること</h2>
+        <p class="lead mb-0">お気に入りのワインの投稿や、他のユーザの投稿にいいね！ができます。</p>
       </div>
     </div>
   </div>
@@ -84,19 +93,15 @@
       <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
         <ul class="list-inline mb-2">
           <li class="list-inline-item">
-            <a href="#">About</a>
+            <a href="/">Vinlog</a>
           </li>
           <li class="list-inline-item">&sdot;</li>
           <li class="list-inline-item">
-            <a href="#">Contact</a>
+            <a href="wines">Wines</a>
           </li>
           <li class="list-inline-item">&sdot;</li>
           <li class="list-inline-item">
-            <a href="#">Terms of Use</a>
-          </li>
-          <li class="list-inline-item">&sdot;</li>
-          <li class="list-inline-item">
-            <a href="#">Privacy Policy</a>
+            <a href="users">Users</a>
           </li>
         </ul>
         <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2020. All Rights Reserved.</p>
@@ -104,18 +109,13 @@
       <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
         <ul class="list-inline mb-0">
           <li class="list-inline-item mr-3">
-            <a href="#">
+            <a href="http://www.facebook.com/share.php?u=【共有するURL】">
               <i class="fab fa-facebook fa-2x fa-fw"></i>
             </a>
           </li>
           <li class="list-inline-item mr-3">
-            <a href="#">
+            <a href="http://twitter.com/share?text=【ツイート文（日本語が含まれる場合にはURLエンコードが必要）】&url=【共有するURL】&hashtags=【ハッシュタグ（複数あるときはカンマ区切り）】">
               <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#">
-              <i class="fab fa-instagram fa-2x fa-fw"></i>
             </a>
           </li>
         </ul>

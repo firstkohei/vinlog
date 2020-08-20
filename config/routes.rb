@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
  end
  
- resources :wines
+ resources :wines do
+  get :search, on: :collection
+ end
+ 
  resources :favorites, only: [:create, :destroy]
- resources :password_resets,     only: [:new, :create, :edit, :update]
 end

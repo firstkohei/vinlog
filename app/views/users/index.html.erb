@@ -4,15 +4,12 @@
     <div class="container">
       <h1>Users</h1>
       <p class="lead text-muted">ユーザー一覧</p>
-      <p>
-        <a href="#" class="btn btn-primary my-2">ユーザー登録してみよう！</a>
-      </p>
+      <a href="signup" class="btn btn-primary my-2">ユーザー登録をしてみよう！</a>
     </div>
   </section>
 
   <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row">
         <% @users.each do |user| %>
         <div class="col-md-4">
@@ -30,4 +27,5 @@
       </div>
     </div>
   </div>
+
 </main>

@@ -1,29 +1,24 @@
 <div class="container">
-
-  <!-- Portfolio Item Heading -->
   <h1 class="my-4"><%= @wine.name %></h1>
-
-  <!-- Portfolio Item Row -->
   <div class="row">
-  
-    <div class="col-md-4">
+    <div class="col-md-6">
      <% if @wine.image? %>
        <%= image_tag @wine.image.url %>
      <% end %>
     </div>
-  
-    <div class="col-md-8">
-      <div class="col-md-8">
+    <div class="col-md-6">
+      <div class="col-md-12">
         <table class="table">
            <tr><td>生産国・地域</td><td><%= @wine.area %></td></tr>
            <tr><td>主なブドウ品種</td><td><%= @wine.grape %></td></tr>
            <tr><td>味わいのタイプ</td><td><%= @wine.taste %></td></tr>
+           <tr><td>ワインの投稿者</td><td><%= link_to @wine.user.name, user_path(@wine.user) %>
         </table>
       </div>
     </div>
-    <!-- /.row -->
   </div>
- <h3 class="mt-5">このワインの感想</h3>
- <p><%= @wine.content %></p>
+   <h3 class="mt-5">このワインの感想</h3>
+   <p><%= @wine.content %></p>
+  <p><%= @count_likes %></p>
 </div>
   
