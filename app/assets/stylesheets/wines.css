@@ -2,3 +2,10 @@
 height:200px;
 width:200px;
 }
+
+@media(max-width: 567px) {
+  .image-show {
+  width: 100%;
+  max-width: 100%;
+}
+}

@@ -1,10 +1,10 @@
 <div class="container">
   <h1 class="my-4"><%= @wine.name %></h1>
   <div class="row">
-    <div class="col-md-6">
-     <% if @wine.image? %>
-       <%= image_tag @wine.image.url %>
-     <% end %>
+    <div class="col-md-4 image-show">
+     <div class="card">
+        <%= image_tag @wine.image.to_s %>
+     </div>
     </div>
     <div class="col-md-6">
       <div class="col-md-12">
