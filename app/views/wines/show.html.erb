@@ -2,7 +2,7 @@
   <h1 class="my-4"><%= @wine.name %></h1>
   <div class="row">
     <div class="col-md-6">
-      <div class="wine"><%= image_tag @wine.image.to_s, :size => '320x400' %></div>
+      <div class="wine"><%= image_tag @wine.image.to_s, :size => '350x400' %></div>
       <% unless current_user == @user %>
         <% if current_user.favorite?(@wine) %>
           <%= form_with(model: current_user.favorites.find_by(wine_id: @wine.id), local: true, method: :delete) do |f| %>
