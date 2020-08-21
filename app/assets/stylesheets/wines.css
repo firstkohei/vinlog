@@ -9,3 +9,9 @@ width:200px;
   max-width: 100%;
 }
 }
+
+@media(max-width: 567px) {
+    .list {
+        margin-top: 30px;
+    }
+}
