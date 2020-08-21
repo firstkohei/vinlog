@@ -3,7 +3,7 @@ class WinesController < ApplicationController
   before_action :require_user_logged_in, only: [:new]
   
   def index
-    @wines = Wine.order(id: :desc).page(params[:page]).per(8)
+    @wines = Wine.order(id: :desc).page(params[:page]).per(9)
   end
 
   def show

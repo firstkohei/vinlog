@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @wines = @user.wines.order(id: :desc).page(params[:page])
+    @wines = @user.wines.order(id: :desc).page(params[:page]).per(8)
     counts(@user)
   end
 

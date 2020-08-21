@@ -15,8 +15,17 @@
  }
  
 .text {
+  padding-bottom: 4px;
   width: 250px;
   height: 38px;
  }
 
- 
+.showcase .showcase-img {
+  background-position-x: center;
+}
+
+@media(max-width: 567px) {
+  .showcase .showcase-img {
+    min-height: 20rem;
+  }
+}
