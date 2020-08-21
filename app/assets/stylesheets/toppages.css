@@ -29,3 +29,15 @@
     min-height: 20rem;
   }
 }
+
+.wine {
+    width: 100%;
+   max-width: 100%;
+    height: auto;
+  }
+  
+  @media(max-width: 567px) {
+  .wine-image {
+    height: 350px;
+  }
+}

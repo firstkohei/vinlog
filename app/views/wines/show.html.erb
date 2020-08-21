@@ -1,10 +1,27 @@
 <div class="container">
   <h1 class="my-4"><%= @wine.name %></h1>
   <div class="row">
-    <div class="col-md-4 image-show">
-     <div class="card">
-        <%= image_tag @wine.image.to_s %>
-     </div>
+    <div class="col-md-6">
+      <div class="wine"><%= image_tag @wine.image.to_s, :size => '320x400' %></div>
+      <% unless current_user == @user %>
+        <% if current_user.favorite?(@wine) %>
+          <%= form_with(model: current_user.favorites.find_by(wine_id: @wine.id), local: true, method: :delete) do |f| %>
+            <%= hidden_field_tag :wine_id, @wine.id %>
+            <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+             <i class="fas fa-heart unlike-btn"></i>
+             <%= @wine.favorite_users.count %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+            <%= hidden_field_tag :wine_id, @wine.id %>
+            <%= f.button :type => "submit", style: 'border-style: none; background: none;' do %>
+             <i class="far fa-heart like-btn"></i>
+             <%= @wine.favorite_users.count %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-md-6">
       <div class="col-md-12">
@@ -20,5 +37,8 @@
    <h3 class="mt-5">このワインの感想</h3>
    <p><%= @wine.content %></p>
   <p><%= @count_likes %></p>
+  <% if current_user == @wine.user %>
+    <p class="text-center"><%= link_to "このワインを削除する", @wine, method: :delete, data: { confirm: "本当に削除しますか？" } %></p>
+  <% end %>
 </div>
   

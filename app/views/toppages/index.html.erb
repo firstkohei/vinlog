@@ -25,7 +25,7 @@
     <% @wines.each do |wine| %>
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
-        <%= image_tag wine.image.to_s %>
+        <%= image_tag wine.image.to_s, class: "wine-image" %>
           <div class="card-body">
             <p class="card-text"><%= link_to wine.name, wine_path(wine) %></p>
             <div class="d-flex justify-content-between align-items-center">
@@ -51,12 +51,12 @@
               <% end %>
               </div>
               <div class="d-flex justify-content-between align-items-center">
-                  <% if current_user == wine.user %>
-                    <%= link_to "削除", wine, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-                  <% end %>
-                  <% if current_user != wine.user %>
-                    <small class="text-muted">投稿者：<%= link_to wine.user.name, user_path(wine.user) %></small>
-                  <% end %>
+                <% if current_user == wine.user %>
+                  <%= link_to "削除", wine, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                <% end %>
+                <% if current_user != wine.user %>
+                  <small class="text-muted">投稿者：<%= link_to wine.user.name, user_path(wine.user) %></small>
+                <% end %>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@
             </a>
           </li>
           <li class="list-inline-item mr-3">
-            <a href="http://twitter.com/share?text=【ツイート文（ワインレビューならVinlog!）】&url=【https://vinlog.herokuapp.com/】&hashtags=【Vinlog】">
+            <a href="http://twitter.com/share?text=【（ワインレビューならVinlog!）】&url=【https://vinlog.herokuapp.com/】&hashtags=【Vinlog】">
               <i class="fab fa-twitter-square fa-2x fa-fw"></i>
             </a>
           </li>
