@@ -56,7 +56,7 @@ class WinesController < ApplicationController
   private
 
   def wine_params
-    params.require(:wine).permit(:name, :area, :taste, :grape, :content, :image)
+    params.require(:wine).permit(:name, :area, :taste, :grape, :content, :image, :color)
   end
   
   def correct_user

@@ -28,6 +28,7 @@
         <table class="table">
            <tr><td>生産国・地域</td><td><%= @wine.area %></td></tr>
            <tr><td>主なブドウ品種</td><td><%= @wine.grape %></td></tr>
+           <tr><td>色</td><td><%= @wine.color %>
            <tr><td>味わいのタイプ</td><td><%= @wine.taste %></td></tr>
            <tr><td>ワインの投稿者</td><td><%= link_to @wine.user.name, user_path(@wine.user) %>
         </table>
